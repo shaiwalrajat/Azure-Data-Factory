@@ -1,0 +1,59 @@
+{
+	"name": "009ppl1hrback",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "currentdatetime",
+					"value": {
+						"value": "@utcNow()",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable2",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "currentdatetime1hourback",
+					"value": {
+						"value": "@subtractFromTime(utcnow(),1,'Hour')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"currentdatetime": {
+				"type": "String"
+			},
+			"currentdatetime1hourback": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-08-07T09:55:27Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

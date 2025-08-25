@@ -1,0 +1,9 @@
+{
+	"name": "cduuatadf",
+	"location": "germanywestcentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "1c364911-501d-4a33-a030-ec359324f997",
+		"tenantId": "88720163-6c48-45d8-bfaa-705ea22a2ef5"
+	}
+}

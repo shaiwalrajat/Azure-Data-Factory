@@ -1,0 +1,71 @@
+{
+	"name": "024Switch",
+	"properties": {
+		"activities": [
+			{
+				"name": "Switch1",
+				"type": "Switch",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"on": {
+						"value": "@variables('x')",
+						"type": "Expression"
+					},
+					"cases": [
+						{
+							"value": "1000",
+							"activities": [
+								{
+									"name": "Set variable1",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "Result",
+										"value": "1k"
+									}
+								}
+							]
+						},
+						{
+							"value": "2000",
+							"activities": [
+								{
+									"name": "Set variable2",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "Result",
+										"value": "2k"
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"variables": {
+			"x": {
+				"type": "String",
+				"defaultValue": "2000"
+			},
+			"Result": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-08-08T14:19:11Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,63 @@
+{
+	"name": "023pplIFCondition",
+	"properties": {
+		"activities": [
+			{
+				"name": "If Condition1",
+				"type": "IfCondition",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(variables('X'),1000)",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "Result",
+								"value": "no"
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Set Result",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "Result",
+								"value": "Yes"
+							}
+						}
+					]
+				}
+			}
+		],
+		"variables": {
+			"X": {
+				"type": "Integer",
+				"defaultValue": 100
+			},
+			"Result": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-08-08T14:11:13Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

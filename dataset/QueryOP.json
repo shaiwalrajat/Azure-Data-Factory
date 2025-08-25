@@ -1,0 +1,17 @@
+{
+	"name": "QueryOP",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ASQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "tbl",
+			"table": "SalesData"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

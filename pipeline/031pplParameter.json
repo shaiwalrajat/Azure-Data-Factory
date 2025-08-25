@@ -1,0 +1,38 @@
+{
+	"name": "031pplParameter",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "y",
+					"value": {
+						"value": "@pipeline().parameters.x",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"x": {
+				"type": "int",
+				"defaultValue": 10
+			}
+		},
+		"variables": {
+			"y": {
+				"type": "Integer"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-08-08T15:25:02Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
