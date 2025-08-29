@@ -6781,6 +6781,181 @@
 				"[concat(variables('factoryId'), '/datasets/DF_INPUT')]",
 				"[concat(variables('factoryId'), '/datasets/DF_DERIVED_COLUMN')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ppl50CondSplitX')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ppl50CondSplitX",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "df006CondSplitX",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"Readcsv": {},
+									"sinkIndia": {},
+									"sinkFrance": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"folder": {
+					"name": "Transformation"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/df006CondSplitX')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/df006CondSplitX')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "DF_INPUT",
+								"type": "DatasetReference"
+							},
+							"name": "Readcsv"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DF_India",
+								"type": "DatasetReference"
+							},
+							"name": "sinkIndia"
+						},
+						{
+							"dataset": {
+								"referenceName": "DF_France",
+								"type": "DatasetReference"
+							},
+							"name": "sinkFrance"
+						}
+					],
+					"transformations": [
+						{
+							"name": "splitIndia"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          OrderDate as date 'dd-MM-yyyy',",
+						"          ProductKey as short,",
+						"          Country as string,",
+						"          EnglishProductName as string,",
+						"          SalesAmount as double,",
+						"          TaxAmt as double",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> Readcsv",
+						"Readcsv split(Country=='India',",
+						"     Country=='France',",
+						"     disjoint: false) ~> splitIndia@(India, France)",
+						"splitIndia@India sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     truncate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError') ~> sinkIndia",
+						"splitIndia@France sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     truncate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError') ~> sinkFrance"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DF_INPUT')]",
+				"[concat(variables('factoryId'), '/datasets/DF_India')]",
+				"[concat(variables('factoryId'), '/datasets/DF_France')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DF_France')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ASQL",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DF_France"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_ASQL')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DF_India')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ASQL",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DF_India"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_ASQL')]"
+			]
 		}
 	]
 }
