@@ -13,6 +13,68 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/df005DerivedColumn')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "DF_INPUT",
+								"type": "DatasetReference"
+							},
+							"name": "ReadCsv"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DF_DERIVED_COLUMN",
+								"type": "DatasetReference"
+							},
+							"name": "sink"
+						}
+					],
+					"transformations": [
+						{
+							"name": "derivedColumn"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          OrderDate as date 'dd-MM-yyyy',",
+						"          ProductKey as short,",
+						"          Country as string,",
+						"          EnglishProductName as string,",
+						"          SalesAmount as double,",
+						"          TaxAmt as double",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> ReadCsv",
+						"ReadCsv derive(Year = year(OrderDate),",
+						"          Month = month(OrderDate),",
+						"          Day = dayOfMonth(OrderDate),",
+						"          MonthName = toString(OrderDate, 'MMM'),",
+						"          Tax = SalesAmount*0.05) ~> derivedColumn",
+						"derivedColumn sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError') ~> sink"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/df006CondSplitX')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
@@ -86,6 +148,71 @@
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true,",
 						"     errorHandlingOption: 'stopOnFirstError') ~> sinkFrance"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dff07cast')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "DF_INPUT",
+								"type": "DatasetReference"
+							},
+							"name": "ReadCSv"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DF_CAST",
+								"type": "DatasetReference"
+							},
+							"name": "sinkCast"
+						}
+					],
+					"transformations": [
+						{
+							"name": "cast1"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          OrderDate as string,",
+						"          ProductKey as string,",
+						"          Country as string,",
+						"          EnglishProductName as string,",
+						"          SalesAmount as string,",
+						"          TaxAmt as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> ReadCSv",
+						"ReadCSv cast(output(",
+						"          OrderDate as date 'dd-MM-yyyy',",
+						"          ProductKey as short,",
+						"          Country as string,",
+						"          SalesAmount as double,",
+						"          TaxAmt as double",
+						"     ),",
+						"     errors: true) ~> cast1",
+						"cast1 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError') ~> sinkCast"
 					]
 				}
 			},
@@ -304,7 +431,9 @@
 				"annotations": [],
 				"lastPublishTime": "2025-08-13T12:00:08Z"
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/df005DerivedColumn')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ppl046Selecttx')]",
@@ -498,6 +627,55 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/df006CondSplitX')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/051pplCast')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DataFlowCast",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "dff07cast",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"ReadCSv": {},
+									"sinkCast": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"folder": {
+					"name": "Transformation"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/dff07cast')]"
 			]
 		}
 	]
