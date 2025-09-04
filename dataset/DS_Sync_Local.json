@@ -1,0 +1,23 @@
+{
+	"name": "DS_Sync_Local",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_LOCAL_FILE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"folderPath": "Users/Rumana Javali/Downloads/Migration"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

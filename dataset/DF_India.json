@@ -12,5 +12,6 @@
 			"schema": "dbo",
 			"table": "DF_India"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

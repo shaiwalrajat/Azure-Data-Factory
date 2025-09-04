@@ -1,9 +1,9 @@
 {
-	"name": "051pplCast",
+	"name": "064pplStringifyTX",
 	"properties": {
 		"activities": [
 			{
-				"name": "DataFlowCast",
+				"name": "Data flow Stringify",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dff015cast",
+						"referenceName": "df020Stringify",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -31,7 +31,7 @@
 			"name": "Transformation"
 		},
 		"annotations": [],
-		"lastPublishTime": "2025-09-04T09:32:19Z"
+		"lastPublishTime": "2025-09-04T10:43:46Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

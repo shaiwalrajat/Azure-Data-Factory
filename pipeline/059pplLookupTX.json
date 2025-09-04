@@ -1,9 +1,9 @@
 {
-	"name": "051pplCast",
+	"name": "059pplLookupTX",
 	"properties": {
 		"activities": [
 			{
-				"name": "DataFlowCast",
+				"name": "Data flow Lookup",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dff015cast",
+						"referenceName": "df014lookup",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -31,7 +31,7 @@
 			"name": "Transformation"
 		},
 		"annotations": [],
-		"lastPublishTime": "2025-09-04T09:32:19Z"
+		"lastPublishTime": "2025-09-01T14:12:45Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

@@ -1,9 +1,9 @@
 {
-	"name": "051pplCast",
+	"name": "053pplAggregate",
 	"properties": {
 		"activities": [
 			{
-				"name": "DataFlowCast",
+				"name": "Data flow Aggregate",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dff015cast",
+						"referenceName": "df007Aggregate",
 						"type": "DataFlowReference"
 					},
 					"compute": {

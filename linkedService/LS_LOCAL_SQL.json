@@ -1,0 +1,21 @@
+{
+	"name": "LS_LOCAL_SQL",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "DESKTOP-RKA8T21",
+			"database": "AdventureWorksDW",
+			"encrypt": "mandatory",
+			"trustServerCertificate": true,
+			"authenticationType": "Windows",
+			"userName": "DESKTOP-RKA8T21\\Rumana Javali",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI0ZDAxZjhhNC1lYzIxLTQ1MDktYWRjNy01NzJjMGI2MDViMTEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "SelfhostedIR",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

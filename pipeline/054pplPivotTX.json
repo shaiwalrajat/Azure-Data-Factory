@@ -1,9 +1,9 @@
 {
-	"name": "051pplCast",
+	"name": "054pplPivotTX",
 	"properties": {
 		"activities": [
 			{
-				"name": "DataFlowCast",
+				"name": "Data flowPivot",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dff015cast",
+						"referenceName": "df009pivot",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -31,7 +31,7 @@
 			"name": "Transformation"
 		},
 		"annotations": [],
-		"lastPublishTime": "2025-09-04T09:32:19Z"
+		"lastPublishTime": "2025-08-29T14:49:30Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

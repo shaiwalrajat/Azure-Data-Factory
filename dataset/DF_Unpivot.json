@@ -1,0 +1,57 @@
+{
+	"name": "DF_Unpivot",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ASQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "EnglishProductName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SalesAustralia",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "SalesCanada",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "SalesFrance",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "SalesGermany",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "SalesIndia",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "SalesItaly",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "SalesUnited States",
+				"type": "float",
+				"precision": 15
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DF_Pivot"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
