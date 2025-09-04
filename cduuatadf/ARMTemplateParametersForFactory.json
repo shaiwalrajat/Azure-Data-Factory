@@ -1,0 +1,48 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "cduuatadf"
+		},
+		"LS_ADLS_accountKey": {
+			"value": ""
+		},
+		"LS_ASQL_password": {
+			"value": ""
+		},
+		"LS_LOCAL_FILE_password": {
+			"value": ""
+		},
+		"LS_LOCAL_SQL_password": {
+			"value": ""
+		},
+		"LS_ADLS_properties_typeProperties_url": {
+			"value": "https://cduuat2adls.dfs.core.windows.net/"
+		},
+		"LS_ASQL_properties_typeProperties_server": {
+			"value": "cduuatmysqlserver.database.windows.net"
+		},
+		"LS_ASQL_properties_typeProperties_database": {
+			"value": "cdudevmysqldb"
+		},
+		"LS_ASQL_properties_typeProperties_userName": {
+			"value": "sqladmin"
+		},
+		"LS_LOCAL_FILE_properties_typeProperties_host": {
+			"value": "C:\\"
+		},
+		"LS_LOCAL_FILE_properties_typeProperties_userId": {
+			"value": "DESKTOP-RKA8T21\\Rumana Javali"
+		},
+		"LS_LOCAL_SQL_properties_typeProperties_server": {
+			"value": "DESKTOP-RKA8T21"
+		},
+		"LS_LOCAL_SQL_properties_typeProperties_database": {
+			"value": "AdventureWorksDW"
+		},
+		"LS_LOCAL_SQL_properties_typeProperties_userName": {
+			"value": "DESKTOP-RKA8T21\\Rumana Javali"
+		}
+	}
+}
