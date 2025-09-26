@@ -1,0 +1,46 @@
+{
+	"name": "Finaltblorder",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "OrderDate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ProductKey",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Country",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EnglishProductName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SalesAmount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TaxAmt",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CurrentTimeStamp",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "ORDERS"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

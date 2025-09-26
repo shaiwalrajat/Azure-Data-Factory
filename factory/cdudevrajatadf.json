@@ -1,0 +1,9 @@
+{
+	"name": "cdudevrajatadf",
+	"location": "germanywestcentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "6a868f27-ff4d-47cd-97e1-02b0b15edff7",
+		"tenantId": "cb1c2d8b-7b10-441c-b264-c459f35f873a"
+	}
+}

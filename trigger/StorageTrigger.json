@@ -1,0 +1,28 @@
+{
+	"name": "StorageTrigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "006pplAutopickFile",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"fileName": "@triggerBody().fileName"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/mycontainer/blobs/Files",
+			"blobPathEndsWith": ".csv",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/06ca6124-bc94-4005-b978-ca79a5499e9e/resourceGroups/CDU-RAJAT-DEV/providers/Microsoft.Storage/storageAccounts/cdudevrajatadls",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}

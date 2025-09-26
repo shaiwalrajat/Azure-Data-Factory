@@ -1,0 +1,71 @@
+{
+	"name": "df001incrementalload",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Stage",
+						"type": "DatasetReference"
+					},
+					"name": "ReadCsv"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Finaltblorder",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "AddTimeStampColumn"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     param_date as string ('1900-01-01')",
+				"}",
+				"source(output(",
+				"          OrderDate as date 'dd-MM-yyyy',",
+				"          ProductKey as short,",
+				"          Country as string,",
+				"          EnglishProductName as string,",
+				"          SalesAmount as double,",
+				"          TaxAmt as double",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> ReadCsv",
+				"ReadCsv filter(OrderDate>toDate($param_date, 'yyyy-MM-dd')) ~> filter1",
+				"filter1 derive(CurrentTimeStamp = currentTimestamp()) ~> AddTimeStampColumn",
+				"AddTimeStampColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          OrderDate as string,",
+				"          ProductKey as string,",
+				"          Country as string,",
+				"          EnglishProductName as string,",
+				"          SalesAmount as string,",
+				"          TaxAmt as string,",
+				"          CurrentTimeStamp as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+			]
+		}
+	}
+}

@@ -1,0 +1,41 @@
+{
+	"name": "DS_LOCAL_CSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_LOCAL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": "Set1.csv",
+				"folderPath": "Users/Rumana Javali/Downloads/007.ADFDatasets"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "EMPID",
+				"type": "String"
+			},
+			{
+				"name": "EMPNAME",
+				"type": "String"
+			},
+			{
+				"name": "SALARY",
+				"type": "String"
+			},
+			{
+				"name": "Month",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
